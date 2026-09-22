@@ -1,0 +1,172 @@
+:root {
+  --paper: #f3ead8;
+  --ink: #1c1612;
+  --mute: #6b5c4c;
+  --rule: #d4c4aa;
+  --ember: #c45c2a;
+  --ember-soft: #e8c4a8;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  animation: grain 8s steps(6) infinite;
+}
+@keyframes grain {
+  0%, 100% { transform: translate(0,0); }
+  25% { transform: translate(-1%, 1%); }
+  50% { transform: translate(1%, -1%); }
+  75% { transform: translate(-1%, -1%); }
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+.wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 22px 80px;
+}
+
+.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+  animation: rise 0.7s ease both;
+}
+.mark {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 28px;
+  font-weight: 600;
+}
+.mark em { font-style: italic; font-weight: 400; color: var(--ember); }
+nav { display: flex; gap: 18px; font-size: 13px; color: var(--mute); }
+nav a:hover { color: var(--ink); }
+
+.hero {
+  padding: 48px 0 28px;
+  animation: rise 0.85s 0.08s ease both;
+}
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 11px;
+  color: var(--ember);
+  margin-bottom: 10px;
+}
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+.lede {
+  max-width: 38ch;
+  color: var(--mute);
+  line-height: 1.55;
+}
+.clock {
+  margin-top: 22px;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--mute);
+}
+.clock b { color: var(--ink); font-weight: 500; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  margin-top: 12px;
+}
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: rgba(255,250,240,0.55);
+  border: 1px solid var(--rule);
+  padding: 20px 22px;
+  animation: lift 0.7s ease both;
+}
+.card + .card { margin-top: 14px; }
+.card h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 0 0 8px;
+}
+.meta { font-size: 12px; color: var(--mute); margin-bottom: 10px; }
+.card p { margin: 0; line-height: 1.55; color: #2a231c; }
+
+.note {
+  border-bottom: 1px dashed var(--rule);
+  padding: 14px 0;
+  animation: rise 0.6s ease both;
+}
+.note:last-child { border-bottom: 0; }
+.note h3 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 18px;
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+.note p { margin: 0; white-space: pre-wrap; }
+
+form { display: flex; flex-direction: column; gap: 10px; }
+input, textarea {
+  background: #fffaf2;
+  border: 1px solid var(--rule);
+  padding: 10px 12px;
+  outline: none;
+}
+textarea { min-height: 120px; resize: vertical; }
+input:focus, textarea:focus { border-color: var(--ember); }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+button {
+  background: var(--ink);
+  color: var(--paper);
+  border: 0;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s;
+}
+button:hover { transform: translateY(-1px); }
+button.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--mute); }
+.err { color: #8b2a1a; font-size: 13px; }
+.ok { color: #3d5a32; font-size: 13px; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes lift {
+  from { opacity: 0; transform: translateY(14px) rotate(-0.2deg); }
+  to { opacity: 1; transform: none; }
+}
